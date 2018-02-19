@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Rathanavel</title>
+</head>
+<body>
+    Hello! There.
+    <ul></ul>
+    <input value="Hello!" />
+    <button>Send</button>
+
+
+    <script src="Scripts/jquery-1.10.2.min.js"></script>
+    <script src="Scripts/jquery.signalR-2.1.2.min.js"></script>
+    <script src="signalr/hubs"></script>
+    <!--<script type="text/javascript" src="~/SignalRChat/signalr/hubs">
+
+    <!--<script src='<%: ResolveClientUrl("~/signalr/hubs") %>'></script>-->
+    <script>
+        var ratz = $.connection.myHub;
+        ratz.client.receive = function (id, message) {
+            $('ul').append('<li>' + id + ' : ' + message + '</li>');
+        };
+        $('button').click(function () {
+            ratz.server.send($('input').val());
+        $('input').val();
+        })
+
+        $.connection.hub.start();
+
+    </script>
+</body>
+</html>
